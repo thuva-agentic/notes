@@ -1,43 +1,51 @@
 # Tech Context
 
-## Stack (issue #1 — greenfield)
+## Stack (shipped — issue #1)
 
-- **Electron** + **React** + **TypeScript** + **Vite**
-- **Tailwind CSS v4** (CSS-first config)
+- **Electron 36** + **electron-vite 3** + **React 19** + **TypeScript** (strict)
+- **Tailwind CSS v4** (`@tailwindcss/vite`, CSS-first `src/index.css`)
 - **shadcn/ui** + **Radix UI** primitives
-- **React Icons**
-- **Tiptap** — markdown / rich-text editor
-- Local state: lightweight store (e.g. Zustand) or React state; no server cache needed
+- **React Icons** + **lucide-react** (shadcn)
+- **Tiptap 3** — `@tiptap/react`, `@tiptap/starter-kit`, `@tiptap/markdown` (WYSIWYG, markdown I/O)
+- **react-router-dom** — `HashRouter` for in-app navigation
+- **Vitest** — unit tests for pure domain logic
+- Local UI state: React hooks (`useNotes`, `useFolders`); no global store
 
 ## Repository
 
 - GitHub: `thuva-agentic/notes`
-- Base branch: `staging` (per `project-config.mdc`)
-- Default remote branch on GitHub: `main` (empty repo — `staging` to be created on first push)
+- Base branch: `staging`
+- Feature branch: `feature-1-local-notes-app-electron-tiptap`
 
-## Tooling (to scaffold)
+## Tooling
 
-- `npm run dev` | `build` | `lint`
-- Electron builder for packaging (later phase)
+| Script | Purpose |
+|--------|---------|
+| `npm run dev` | Electron + Vite dev with HMR |
+| `npm run build` | Production build |
+| `npm run preview` | Preview production build |
+| `npm run lint` | ESLint |
+| `npm run test` | Vitest (`src/**/*.test.ts`) |
 
-## Project layout (target)
+## Project layout
 
 | Area | Path | Purpose |
 |------|------|---------|
 | Renderer | `src/` | React app, features, components |
-| Main | `electron/` | IPC handlers, FS services |
+| Main | `electron/main/` | IPC handlers, note store services |
 | Preload | `electron/preload.ts` | Typed `window.electronAPI` bridge |
-| Features | `src/features/notes/` | Editor, list, search, organization |
+| Features | `src/features/notes/` | Editor, list, search, hooks, lib |
+| UI | `src/components/ui/` | shadcn primitives |
+| Tests | `src/features/notes/lib/*.test.ts` | Pure function unit tests |
 
-## Dependencies (planned)
+## Data storage
 
-- `electron`, `vite`, `react`, `typescript`
-- `@tiptap/react`, `@tiptap/starter-kit` (+ markdown extensions per Q&A)
-- `tailwindcss`, shadcn/ui components
-- `react-icons`
+- One `.md` file per note under `app.getPath('userData')/notes/`
+- YAML frontmatter: `title`, `createdAt`, `updatedAt`
+- Nested folder hierarchy on disk
 
 ## Constraints
 
 - Strict TypeScript
-- Functional-first: pure sort/filter/search in `src/features/notes/lib/`
-- All note persistence through main-process IPC
+- Functional-first: pure `sortNotes`, `searchNotes`, `buildFolderTree` in `src/features/notes/lib/`
+- All note persistence through main-process IPC (`contextIsolation: true`)
