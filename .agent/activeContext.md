@@ -10,7 +10,7 @@
 
 ## Current Focus
 
-Phase 1 complete (Electron + Vite + React scaffold). Run `/dm implement-next-phase` for Phase 2.
+Phase 2 complete (Tailwind v4 + shadcn/ui). Run `/dm implement-next-phase` for Phase 3.
 
 ## Open Decisions
 

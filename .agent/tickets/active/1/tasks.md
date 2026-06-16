@@ -19,11 +19,11 @@
 
 ## Phase 2: Tailwind v4 + shadcn/ui foundation
 
-- [ ] Add Tailwind CSS v4 via `@tailwindcss/vite` and `src/index.css` with `@import "tailwindcss"`
-- [ ] Run `shadcn` init; add `src/lib/utils.ts` with `cn()` helper
-- [ ] Add shadcn primitives: `Button`, `Input`, `ScrollArea`, `Separator`, `DropdownMenu`, `Dialog`
-- [ ] Wire global styles and base font in `src/main.tsx`
-- [ ] Add `react-icons` and verify an icon renders in `App.tsx`
+- [x] Add Tailwind CSS v4 via `@tailwindcss/vite` and `src/index.css` with `@import "tailwindcss"`
+- [x] Run `shadcn` init; add `src/lib/utils.ts` with `cn()` helper
+- [x] Add shadcn primitives: `Button`, `Input`, `ScrollArea`, `Separator`, `DropdownMenu`, `Dialog`
+- [x] Wire global styles and base font in `src/main.tsx`
+- [x] Add `react-icons` and verify an icon renders in `App.tsx`
 
 ## Phase 3: Local note storage (main process)
 
