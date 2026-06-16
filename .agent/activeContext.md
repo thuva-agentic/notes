@@ -10,7 +10,7 @@
 
 ## Current Focus
 
-Phase 4 complete (preload bridge & renderer API). Run `/dm implement-next-phase` for Phase 5.
+Phase 5 complete (pure domain logic). Run `/dm implement-next-phase` for Phase 6.
 
 ## Open Decisions
 

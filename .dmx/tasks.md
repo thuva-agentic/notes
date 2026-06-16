@@ -44,11 +44,11 @@
 
 ## Phase 5: Pure domain logic
 
-- [ ] Add `src/features/notes/lib/sortNotes.ts` — sort by title (A–Z default), `updatedAt`, `createdAt` (pure fn)
-- [ ] Add `src/features/notes/lib/searchNotes.ts` — match query against title, body, and folder path segments (case-insensitive)
-- [ ] Add `src/features/notes/lib/buildFolderTree.ts` — build nested `FolderNode[]` from flat paths
-- [ ] Add `src/features/notes/lib/sortNotes.test.ts` — title, date, stable tie-breaking
-- [ ] Add `src/features/notes/lib/searchNotes.test.ts` — title, body, folder name matches; no false positives
+- [x] Add `src/features/notes/lib/sortNotes.ts` — sort by title (A–Z default), `updatedAt`, `createdAt` (pure fn)
+- [x] Add `src/features/notes/lib/searchNotes.ts` — match query against title, body, and folder path segments (case-insensitive)
+- [x] Add `src/features/notes/lib/buildFolderTree.ts` — build nested `FolderNode[]` from flat paths
+- [x] Add `src/features/notes/lib/sortNotes.test.ts` — title, date, stable tie-breaking
+- [x] Add `src/features/notes/lib/searchNotes.test.ts` — title, body, folder name matches; no false positives
 
 ## Phase 6: App shell & folder navigation
 
