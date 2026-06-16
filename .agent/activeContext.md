@@ -7,14 +7,16 @@
 - **GitHub:** https://github.com/thuva-agentic/notes/issues/1
 - **Branch:** `feature-1-local-notes-app-electron-tiptap`
 - **Spec:** `.agent/tickets/active/1/spec.md`
+- **Status:** All 8 phases complete
+
+## Recently Completed
+
+- **Issue #1**: Full v1 notes app — Electron + Tiptap + local `.md` storage, folders, search, sort, shadcn UI
 
 ## Current Focus
 
-Phase 6 complete (app shell & folder navigation). Run `/dm implement-next-phase` for Phase 7.
+Ticket complete. Run `/dm update-memory` to sync learnings, then `/dm create-pr` to open the pull request.
 
 ## Open Decisions
 
-- Local storage format (markdown files vs SQLite index)
-- Organization model (folders vs tags vs both)
-- Default sort order and group-by options
-- Tiptap extensions (markdown import/export, code blocks, etc.)
+- None for v1. Future: packaging/distribution via electron-builder, export/import, tags.

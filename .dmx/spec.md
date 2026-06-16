@@ -67,10 +67,10 @@ Users need a private, offline desktop notebook with comfortable markdown editing
 
 ## Acceptance criteria
 
-- [ ] App launches; empty state invites creating first note
-- [ ] Create, edit, save, delete notes — persisted locally across restarts
-- [ ] Search returns matching notes (title, body, folder names)
-- [ ] Sort controls work (title default A–Z; modified/created available)
-- [ ] Nested folder organization works
-- [ ] `npm run lint` and `npm run build` pass
-- [ ] No network calls required for core note workflows
+- [x] App launches; empty state invites creating first note
+- [x] Create, edit, save, delete notes — persisted locally across restarts
+- [x] Search returns matching notes (title, body, folder names)
+- [x] Sort controls work (title default A–Z; modified/created available)
+- [x] Nested folder organization works
+- [x] `npm run lint` and `npm run build` pass
+- [x] No network calls required for core note workflows

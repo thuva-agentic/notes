@@ -2,7 +2,7 @@
 
 **GitHub:** https://github.com/thuva-agentic/notes/issues/1  
 **Branch:** `feature-1-local-notes-app-electron-tiptap`  
-**Status:** Ready for implementation — see `tasks.md`
+**Status:** Complete — all phases implemented
 
 ## Summary
 
@@ -78,13 +78,13 @@ Answer inline below before `/dm plan`.
 
 ## Acceptance criteria
 
-- [ ] App launches; empty state invites creating first note
-- [ ] Create, edit, save, delete notes — persisted locally across restarts
-- [ ] Search returns matching notes by criteria in Q&A
-- [ ] Sort controls work (at least title + date)
-- [ ] Group/organize per Q&A (folders/tags/notebooks)
-- [ ] `npm run lint` and `npm run build` pass
-- [ ] No network calls required for core note workflows
+- [x] App launches; empty state invites creating first note
+- [x] Create, edit, save, delete notes — persisted locally across restarts
+- [x] Search returns matching notes by criteria in Q&A
+- [x] Sort controls work (at least title + date)
+- [x] Group/organize per Q&A (nested folders)
+- [x] `npm run lint` and `npm run build` pass
+- [x] No network calls required for core note workflows
 
 ## Notes
 

@@ -12,7 +12,7 @@ import { NoteList } from '@/features/notes/components/NoteList'
 import { SearchBar } from '@/features/notes/components/SearchBar'
 import { SortMenu } from '@/features/notes/components/SortMenu'
 import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
+import { NoteEditorPanel } from '@/features/notes/components/NoteEditorPanel'
 
 const sortDirectionForKey = (sortKey: NoteSortKey): 'asc' | 'desc' =>
   sortKey === 'title' ? 'asc' : 'desc'
@@ -25,7 +25,7 @@ export const NotesWorkspace = () => {
   const selectedFolderPath = folderMatch ?? ''
   const selectedNoteId = encodedNoteId ? decodeURIComponent(encodedNoteId) : null
 
-  const { notes, loading, error, writeNote, searchNotes } = useNotes()
+  const { notes, loading, error, writeNote, readNote, deleteNote, searchNotes } = useNotes()
   const {
     folders,
     createFolder,
@@ -86,9 +86,12 @@ export const NotesWorkspace = () => {
     await createFolder(folderPath)
   }
 
-  const selectedNote = notes.find((note) => note.id === selectedNoteId) ?? null
   const showEmptyState =
     !loading && !error && !isSearching && notes.length === 0 && folders.length === 0
+
+  const handleNoteDeleted = () => {
+    navigate(selectedFolderPath.length > 0 ? `/folder/${selectedFolderPath}` : '/')
+  }
 
   return (
     <AppLayout
@@ -154,18 +157,18 @@ export const NotesWorkspace = () => {
                 />
               )}
             </div>
-            <div className="flex flex-1 flex-col p-6">
-              {selectedNote ? (
-                <>
-                  <h3 className="text-2xl font-semibold">{selectedNote.title}</h3>
-                  <Separator className="my-4" />
-                  <p className="text-sm text-muted-foreground">
-                    Editor opens in Phase 7. Note ID: {selectedNote.id}
-                  </p>
-                </>
+            <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+              {selectedNoteId ? (
+                <NoteEditorPanel
+                  noteId={selectedNoteId}
+                  readNote={readNote}
+                  writeNote={writeNote}
+                  deleteNote={deleteNote}
+                  onDeleted={handleNoteDeleted}
+                />
               ) : (
-                <p className="text-sm text-muted-foreground">
-                  Select a note to preview it here.
+                <p className="p-6 text-sm text-muted-foreground">
+                  Select a note to start editing.
                 </p>
               )}
             </div>
