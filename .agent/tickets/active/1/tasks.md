@@ -36,11 +36,11 @@
 
 ## Phase 4: Preload bridge & renderer API
 
-- [ ] Update `electron/preload.ts` — allowlist channels and expose typed `notes.list`, `notes.read`, `notes.write`, `notes.delete`, `notes.search`, `folders.*`
-- [ ] Add `src/types/electron.d.ts` — `Window.electronAPI` interface matching preload
-- [ ] Add `src/services/notesApi.ts` — thin IPC wrappers with optional chaining for tests
-- [ ] Add `src/features/notes/hooks/useNotes.ts` — load note list, refresh on mutations
-- [ ] Add `src/features/notes/hooks/useFolders.ts` — load folder tree, create/rename/delete folder actions
+- [x] Update `electron/preload.ts` — allowlist channels and expose typed `notes.list`, `notes.read`, `notes.write`, `notes.delete`, `notes.search`, `folders.*`
+- [x] Add `src/types/electron.d.ts` — `Window.electronAPI` interface matching preload
+- [x] Add `src/services/notesApi.ts` — thin IPC wrappers with optional chaining for tests
+- [x] Add `src/features/notes/hooks/useNotes.ts` — load note list, refresh on mutations
+- [x] Add `src/features/notes/hooks/useFolders.ts` — load folder tree, create/rename/delete folder actions
 
 ## Phase 5: Pure domain logic
 

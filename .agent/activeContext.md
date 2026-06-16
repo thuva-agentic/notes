@@ -10,7 +10,7 @@
 
 ## Current Focus
 
-Phase 3 complete (local note storage). Run `/dm implement-next-phase` for Phase 4.
+Phase 4 complete (preload bridge & renderer API). Run `/dm implement-next-phase` for Phase 5.
 
 ## Open Decisions
 
