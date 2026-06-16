@@ -10,7 +10,7 @@
 
 ## Current Focus
 
-Greenfield Electron notes app. Answer clarifying questions in `spec.md`, then run `/dm plan` to generate `tasks.md`.
+Phase 1 complete (Electron + Vite + React scaffold). Run `/dm implement-next-phase` for Phase 2.
 
 ## Open Decisions
 
