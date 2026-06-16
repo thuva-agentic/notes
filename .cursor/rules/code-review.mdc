@@ -1,0 +1,14 @@
+---
+description: Review code for quality, security, and maintainability
+alwaysApply: true
+---
+
+Review the code the user provides. 
+Checklist:
+
+- Correctness and edge cases
+- Security issues
+- Readability and naming
+- Test coverage gaps
+
+Provide concrete suggestions with examples where helpful.

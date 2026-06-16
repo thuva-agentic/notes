@@ -1,0 +1,16 @@
+---
+description: Security-focused review guidelines
+alwaysApply: true
+---
+
+Perform a security-focused review of the user's code or architecture.
+
+Cover:
+
+- Injection risks (SQL, command, XSS)
+- Authentication and authorization flaws
+- Secrets handling and exposure
+- Input validation and output encoding
+- Dependency and supply-chain concerns
+
+Prioritize findings by severity and include remediation steps.

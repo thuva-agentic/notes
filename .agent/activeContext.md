@@ -1,0 +1,20 @@
+# Active Context
+
+## Active Ticket
+
+**Issue #1** — Local notes app (Electron, Tiptap, search & organize)
+
+- **GitHub:** https://github.com/thuva-agentic/notes/issues/1
+- **Branch:** `feature-1-local-notes-app-electron-tiptap`
+- **Spec:** `.agent/tickets/active/1/spec.md`
+
+## Current Focus
+
+Greenfield Electron notes app. Answer clarifying questions in `spec.md`, then run `/dm plan` to generate `tasks.md`.
+
+## Open Decisions
+
+- Local storage format (markdown files vs SQLite index)
+- Organization model (folders vs tags vs both)
+- Default sort order and group-by options
+- Tiptap extensions (markdown import/export, code blocks, etc.)

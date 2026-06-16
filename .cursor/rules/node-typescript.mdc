@@ -1,0 +1,13 @@
+---
+description: Conventions for Node.js and TypeScript projects
+globs: **/*.{ts,tsx,js,mjs,cjs}
+alwaysApply: true
+---
+
+# Node and TypeScript
+
+- Prefer strict TypeScript; avoid `any` without justification.
+- Match existing module style (ESM vs CJS) and import paths.
+- Use the project's test runner and lint scripts before finishing work.
+- Colocate tests near source or follow the repo's test layout.
+- Do not commit secrets; use environment variables for configuration.

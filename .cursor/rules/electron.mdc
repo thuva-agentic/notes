@@ -1,0 +1,229 @@
+---
+description: Rules for Electron + React desktop apps
+globs: electron/**/*,src/**/*
+alwaysApply: true
+---
+
+You are working on a **cross-platform Electron desktop application**.
+
+Typical stack (confirm in the repo before assuming):
+
+- **Renderer**: React + TypeScript + Vite (or similar bundler) under `src/`
+- **Main process**: Electron entry and services under `electron/` (or `main/`)
+- **Preload**: Context-isolated bridge exposing a typed API on `window` (e.g. `window.electronAPI`)
+- **Routing**: Often `HashRouter` or `MemoryRouter` when not served over `http://`
+- **Remote data**: HTTP client + cache layer (e.g. Axios + TanStack Query, fetch + SWR)
+- **Local UI state**: Lightweight store (e.g. Zustand, Jotai, Redux)
+- **Styling**: Tailwind CSS v4 (CSS-first config) or project design system
+
+
+---
+
+## Before You Change Anything
+
+1. **Discover the project layout** — read `README`, `package.json`, and scan `src/`, `electron/`, and config files. Do not assume paths from another app.
+2. **Search for existing patterns** — components, hooks, API modules, IPC channels. Reuse before creating.
+3. **Match local conventions** — naming, imports, folder structure, and abstractions used nearby.
+4. **Keep diffs minimal** — do not refactor unrelated code.
+
+If the repo has architecture docs or a knowledge graph (e.g. `graphify-out/`, `docs/architecture.md`), read those when changing multiple areas.
+
+---
+
+## Typical Project Layout
+
+Adapt to what exists; common patterns:
+
+| Area | Common paths | Purpose |
+|------|----------------|---------|
+| Feature UI | `src/app/`, `src/pages/`, `src/features/` | Screens, feature modals, routes |
+| Shared UI | `src/components/` | Reusable primitives |
+| API / data | `src/api/`, `src/services/`, `src/hooks/` | HTTP hooks, clients, types |
+| Providers | `src/providers/` | Context for API clients, theme, etc. |
+| Client state | `src/store/`, `src/state/` | Global UI / session state |
+| Main process | `electron/main/`, `main/` | FS, native APIs, IPC handlers |
+| Preload | `electron/preload.ts`, `preload/` | Allowlisted IPC + `contextBridge` |
+| Bridge types | `*.d.ts` on `Window` | Typings for preload API |
+
+Feature-specific UI stays in feature folders. Shared reusables belong in the components (or `ui/`) directory.
+
+---
+
+## REST / HTTP API (Remote Backend)
+
+Use the project's HTTP layer for **server-side** data (CRUD, auth, uploads to backend).
+
+### Rules
+
+1. **Do not** call `fetch` / `axios` directly in presentational components. Use the project's hooks or service modules.
+2. Use the established API client (from a provider, singleton, or factory) so auth headers, base URL, and error handling stay centralized.
+3. Organize by **domain** (one folder or module per resource): types, query keys, read hooks, mutation hooks, validation schemas.
+4. Follow existing patterns for:
+   - **Reads** — cached queries (e.g. `useQuery`, custom `useCreateQuery`)
+   - **Writes** — mutations with cache invalidation or optimistic updates
+   - **Query keys** — stable enums or constants, not ad-hoc strings
+5. Colocate **Zod** (or project validator) schemas with the domain when forms or payloads are validated.
+6. Dynamic URL segments: follow how the project substitutes `params` (e.g. `/resource/${id}`).
+7. Copy the **nearest similar domain module** as a template for new resources.
+
+### Auth
+
+- Tokens and session lifecycle belong in auth store / interceptors — do not reimplement 401 handling in every hook.
+- Never log or commit secrets, API keys, or tokens.
+
+---
+
+## Electron IPC (Preload Bridge)
+
+Use IPC for **OS-level or main-process-only** work, for example:
+
+- Local filesystem read/write
+- Native dialogs, notifications, shell open
+- Secure credential storage
+- Auto-update, window controls
+- Hardware or OS integrations unavailable in the renderer
+
+### Security rules (required)
+
+1. **`contextIsolation: true`** — renderer must not import `electron` or touch `ipcRenderer` directly.
+2. Expose a **minimal, typed API** via `contextBridge.exposeInMainWorld` in preload.
+3. **Allowlist** channels in preload (`invoke` / `on` / `send`) — reject unknown channel names.
+4. Adding IPC requires **all** of:
+   - Handler in main (`ipcMain.handle` / `ipcMain.on`)
+   - Allowlist entry in preload
+   - Exposed method on the bridge object
+   - TypeScript types on `Window` (or shared types package)
+5. Validate and normalize paths in main before FS access; prevent directory traversal.
+6. Optional chaining in renderer when the bridge may be absent (tests, web fallback): `window.electronAPI?.method?.()`.
+
+### When to use HTTP vs IPC
+
+| Need | Layer |
+|------|--------|
+| Remote server CRUD, auth, cloud storage | HTTP + project API hooks |
+| Local files, OS integration, secure storage | IPC / preload bridge |
+| Pure UI state | Component state or client store |
+
+Put reusable renderer-side IPC wrappers in `src/services/` (or equivalent), not duplicated in every component.
+
+---
+
+## UI Components
+
+### Discover before creating
+
+Before adding a component, search the shared components directory and the current feature folder for:
+
+- Buttons, links, icon buttons
+- Dialog, drawer, sheet, modal, popover
+- Tables, lists, comboboxes, pagination
+- Alerts, toasts, spinners, empty states
+- Layout primitives (tabs, panels, resizable splits)
+
+**Extend or compose** existing pieces instead of duplicating markup and styles.
+
+### New shared component checklist
+
+1. Place multi-file components in a subfolder; single primitives may live at the components root.
+2. Use the project's `cn()` / `clsx` helper for class names when available.
+3. Match the accessibility library already in use (Radix, React Aria, Headless UI, etc.).
+4. Follow compound-component export style if siblings use `Object.assign(Root, { Sub })`.
+5. Use existing portal targets for overlays (check root `index` / `main` for `#modal-container`, etc.).
+
+### Feature-specific UI
+
+- Route-level and feature-only UI stays in the feature directory.
+- Promote to shared components only when used in **two or more** features.
+
+---
+
+## Forms
+
+**Always check for an existing form kit** (e.g. `src/components/Form/`, `src/components/ui/form/`, `Forms/`) before building raw `<input>` markup.
+
+Common stack: **react-hook-form** + **Zod** (or Yup) + shared `Input`, `Select`, `Checkbox`, `Field`, `ErrorMessage`.
+
+### Form rules
+
+1. Define validation with the project's schema library; colocate schemas with API domain or feature.
+2. Prefer composition: `<Form>` → `<Field name="…">` → labeled control → error display.
+3. Avoid manual `useState` per field unless the project consistently does so for simple cases.
+4. Use form context hooks instead of prop-drilling `control` / `register`.
+5. Destructive actions: reuse existing confirm dialog / modal patterns.
+
+---
+
+## Tailwind CSS v4 (when used)
+
+If the project uses Tailwind v4, config is often **CSS-first**:
+
+- `@import "tailwindcss"` in a global CSS entry
+- `@theme` / `@theme inline` for design tokens
+- `@plugin` for official plugins
+- Vite plugin: `@tailwindcss/vite`
+
+### Styling rules
+
+1. Prefer **semantic tokens** (`var(--color-*)`, `var(--theme-*)`) over raw hex/rgb in components.
+2. Respect project rules about color literals (lint/CI scripts) — centralize new colors in theme CSS.
+3. Use `prettier-plugin-tailwindcss` if configured for class sorting.
+4. Reuse variant utilities or component classes (`btn-primary`, etc.) defined in global/styles layers.
+5. Match animation library used nearby (CSS transitions, Framer Motion, etc.).
+
+If the project uses Tailwind v3 with `tailwind.config.js`, follow that project's config instead.
+
+---
+
+## State Management
+
+| Kind | Typical approach |
+|------|------------------|
+| Server / async data | Query library cache (React Query, SWR, RTK Query) |
+| Auth, preferences, UI chrome | Global client store or context |
+| Form state | react-hook-form or equivalent inside form components |
+| Local UI | `useState` / `useReducer` in the component |
+
+- Do not duplicate server list data in a global store if a query cache already owns it.
+- New global state should follow the shape of existing stores (e.g. `state` + `actions`).
+
+---
+
+## Electron Main Process
+
+- Keep handlers thin; put logic in dedicated service modules.
+- Register IPC in one place or a clear registry pattern.
+- Never log secrets; use OS secure storage APIs where credentials are persisted.
+- Sanitize user-provided paths before filesystem or shell operations.
+- Clean up listeners and child processes on `before-quit` / `will-quit`.
+
+---
+
+## After Making Changes
+
+Before marking work complete, run verification from the project root and fix any failures:
+
+1. **`npm run lint`** — ESLint / style rules must pass with no new warnings.
+2. **`npm run build`** — Typecheck and production build must succeed (catches TS errors and bundler issues).
+3. **Tests** — if `package.json` defines a test script (`npm test`, `npm run test`, `npm run test:unit`, etc.), run it as well.
+
+Do not skip these steps after editing renderer, main, preload, or shared code. If a command fails, resolve the errors and re-run until all pass.
+
+---
+
+## Quality Checklist
+
+When implementing or reviewing (focus: general):
+
+- [ ] Discovered project structure and matched existing patterns
+- [ ] Correct layer: HTTP hook vs preload bridge vs local UI state
+- [ ] Reused existing component / form control / API module where possible
+- [ ] Query keys and cache invalidation consistent with the project
+- [ ] Form validation schema and accessible error display
+- [ ] Theme tokens / design system — no stray magic values
+- [ ] IPC fully wired (handler, allowlist, preload, types) with path validation
+- [ ] No `electron` imports in renderer; `contextIsolation` respected
+- [ ] `npm run lint` passes
+- [ ] `npm run build` passes
+- [ ] Project test script passes (when defined in `package.json`)
+
+Provide concrete suggestions with file paths and short examples grounded in **this** repository.

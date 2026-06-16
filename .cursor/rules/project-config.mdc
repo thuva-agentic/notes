@@ -1,0 +1,37 @@
+---
+description: AI SDLC project configuration. Read by every prompt to determine the ticketing provider, base branch, and service credentials for this project.
+alwaysApply: true
+---
+
+# AI SDLC — Project Configuration
+
+## Core Settings
+
+ticketing: github-issues # none | jira | github-issues
+branch_base: staging # base branch all new work branches from (staging | main | master)
+
+## GitHub
+
+owner: thuva-agentic # e.g. my-org
+repo: notes # e.g. my-api
+
+## Jira
+
+# Required when ticketing: jira. Leave blank otherwise.
+
+cloud_id: {your-atlassian-cloud-id} # e.g. 26be6ccf-8778-4a20-9584-98afaab9eba7
+project_key: {your-project-key} # e.g. ENG, DM, WEB
+
+## GitHub Issues
+
+# Required when ticketing: github-issues. Uses owner/repo from GitHub section above.
+
+github_username: thuva-agentic
+
+## None
+
+# When ticketing: none, all ticket steps are skipped.
+
+# Branches are named from descriptions only.
+
+# The full dev loop (spec, plan, implement) still works without a ticketing system.
