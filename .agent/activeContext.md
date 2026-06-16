@@ -10,7 +10,7 @@
 
 ## Current Focus
 
-Phase 5 complete (pure domain logic). Run `/dm implement-next-phase` for Phase 6.
+Phase 6 complete (app shell & folder navigation). Run `/dm implement-next-phase` for Phase 7.
 
 ## Open Decisions
 

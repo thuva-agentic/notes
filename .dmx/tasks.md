@@ -52,13 +52,13 @@
 
 ## Phase 6: App shell & folder navigation
 
-- [ ] Add `src/features/notes/components/AppLayout.tsx` — resizable sidebar + main editor pane
-- [ ] Add `src/features/notes/components/FolderTree.tsx` — nested folder tree with create/rename/delete (Radix/shadcn)
-- [ ] Add `src/features/notes/components/NoteList.tsx` — note rows for selected folder; default sort title A–Z
-- [ ] Add `src/features/notes/components/SortMenu.tsx` — dropdown to switch sort (title / modified / created)
-- [ ] Add `src/features/notes/components/SearchBar.tsx` — filters list via `searchNotes`; shows folder path in results
-- [ ] Add `src/features/notes/components/EmptyState.tsx` — first-run CTA to create folder or note
-- [ ] Add `HashRouter` in `App.tsx` — routes for folder selection and note editor view
+- [x] Add `src/features/notes/components/AppLayout.tsx` — resizable sidebar + main editor pane
+- [x] Add `src/features/notes/components/FolderTree.tsx` — nested folder tree with create/rename/delete (Radix/shadcn)
+- [x] Add `src/features/notes/components/NoteList.tsx` — note rows for selected folder; default sort title A–Z
+- [x] Add `src/features/notes/components/SortMenu.tsx` — dropdown to switch sort (title / modified / created)
+- [x] Add `src/features/notes/components/SearchBar.tsx` — filters list via `searchNotes`; shows folder path in results
+- [x] Add `src/features/notes/components/EmptyState.tsx` — first-run CTA to create folder or note
+- [x] Add `HashRouter` in `App.tsx` — routes for folder selection and note editor view
 
 ## Phase 7: Tiptap editor & note CRUD
 
