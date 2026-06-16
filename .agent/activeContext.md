@@ -10,7 +10,7 @@
 
 ## Current Focus
 
-Phase 2 complete (Tailwind v4 + shadcn/ui). Run `/dm implement-next-phase` for Phase 3.
+Phase 3 complete (local note storage). Run `/dm implement-next-phase` for Phase 4.
 
 ## Open Decisions
 

@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { registerNotesIpcHandlers } from './ipc/notes'
 
 const preloadPath = fileURLToPath(new URL('../preload/index.mjs', import.meta.url))
 
@@ -29,6 +30,7 @@ const createWindow = (): void => {
 }
 
 app.whenReady().then(() => {
+  registerNotesIpcHandlers()
   createWindow()
 
   app.on('activate', () => {

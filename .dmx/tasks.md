@@ -27,12 +27,12 @@
 
 ## Phase 3: Local note storage (main process)
 
-- [ ] Add `electron/main/services/paths.ts` — resolve OS app data dir (`app.getPath('userData')/notes`) with path normalization
-- [ ] Add `src/features/notes/types.ts` — `NoteMeta`, `NoteContent`, `FolderNode`, `NoteSearchResult`
-- [ ] Add `electron/main/services/noteStore.ts` — list/read/write/delete `.md` files; nested folder CRUD; frontmatter or sidecar for title/dates
-- [ ] Add `electron/main/services/pathGuard.ts` — validate resolved paths stay under notes root (no traversal)
-- [ ] Add `electron/main/ipc/notes.ts` — `ipcMain.handle` for `notes:list`, `notes:read`, `notes:write`, `notes:delete`, `notes:search`, `folders:*`
-- [ ] Register IPC handlers in `electron/main/index.ts` on `app.whenReady`
+- [x] Add `electron/main/services/paths.ts` — resolve OS app data dir (`app.getPath('userData')/notes`) with path normalization
+- [x] Add `src/features/notes/types.ts` — `NoteMeta`, `NoteContent`, `FolderNode`, `NoteSearchResult`
+- [x] Add `electron/main/services/noteStore.ts` — list/read/write/delete `.md` files; nested folder CRUD; frontmatter or sidecar for title/dates
+- [x] Add `electron/main/services/pathGuard.ts` — validate resolved paths stay under notes root (no traversal)
+- [x] Add `electron/main/ipc/notes.ts` — `ipcMain.handle` for `notes:list`, `notes:read`, `notes:write`, `notes:delete`, `notes:search`, `folders:*`
+- [x] Register IPC handlers in `electron/main/index.ts` on `app.whenReady`
 
 ## Phase 4: Preload bridge & renderer API
 
