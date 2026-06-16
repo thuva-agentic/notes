@@ -2,7 +2,7 @@
 
 **GitHub:** https://github.com/thuva-agentic/notes/issues/1  
 **Branch:** `feature-1-local-notes-app-electron-tiptap`  
-**Status:** Draft — answer Q&A before `/dm plan`
+**Status:** Complete — all phases implemented
 
 ## Summary
 
@@ -35,37 +35,37 @@ Answer inline below before `/dm plan`.
    - (a) One `.md` file per note in a user-chosen directory
    - (b) SQLite database with markdown content in rows
    - (c) JSON index + markdown files in app data folder
-   - **Answer:** _
+   - **Answer:** a
 
 2. **Organization model:** How should users group notes?
    - (a) **Folders** (nested hierarchy)
    - (b) **Tags** (many-to-many)
    - (c) **Both** folders and tags
    - (d) **Notebooks** only (flat collections, no nesting)
-   - **Answer:** _
+   - **Answer:** a
 
 3. **Default sort:** What should the note list default to?
    - (a) Last modified (newest first)
    - (b) Title (A–Z)
    - (c) Created date (newest first)
-   - **Answer:** _
+   - **Answer:** b
 
 4. **Search scope:** Full-text search should match:
    - (a) Title only
    - (b) Title + body
    - (c) Title + body + tags/folder names
-   - **Answer:** _
+   - **Answer:** c
 
 5. **Editor mode:** Tiptap behavior for v1:
    - (a) WYSIWYG with markdown shortcuts
    - (b) Split view (markdown source + preview)
    - (c) Plain markdown source with live preview panel
-   - **Answer:** _
+   - **Answer:** a
 
 6. **Data directory:** Where do notes live?
    - (a) Fixed app data folder (`~/Library/Application Support/Notes` etc.)
    - (b) User picks folder on first launch (like Obsidian vault)
-   - **Answer:** _
+   - **Answer:** a
 
 ## Technical approach (draft)
 
@@ -78,13 +78,13 @@ Answer inline below before `/dm plan`.
 
 ## Acceptance criteria
 
-- [ ] App launches; empty state invites creating first note
-- [ ] Create, edit, save, delete notes — persisted locally across restarts
-- [ ] Search returns matching notes by criteria in Q&A
-- [ ] Sort controls work (at least title + date)
-- [ ] Group/organize per Q&A (folders/tags/notebooks)
-- [ ] `npm run lint` and `npm run build` pass
-- [ ] No network calls required for core note workflows
+- [x] App launches; empty state invites creating first note
+- [x] Create, edit, save, delete notes — persisted locally across restarts
+- [x] Search returns matching notes by criteria in Q&A
+- [x] Sort controls work (at least title + date)
+- [x] Group/organize per Q&A (nested folders)
+- [x] `npm run lint` and `npm run build` pass
+- [x] No network calls required for core note workflows
 
 ## Notes
 
