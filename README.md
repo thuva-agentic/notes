@@ -1,4 +1,4 @@
-# Notes — Local-First Desktop Notes App
+# Notes Local-First Desktop Notes App
 
 Local-first desktop notes app built with Electron, React, and Tiptap. All notes are stored on disk — no account or cloud sync required.
 
