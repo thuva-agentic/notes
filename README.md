@@ -1,4 +1,4 @@
-# Notes
+# Notes updated
 
 Local-first desktop notes app built with Electron, React, and Tiptap. All notes are stored on disk — no account or cloud sync required.
 
@@ -17,7 +17,7 @@ npm run dev
 Other scripts:
 
 | Command | Purpose |
-|---------|---------|
+| --- | --- |
 | `npm run build` | Production build (main, preload, renderer) |
 | `npm run preview` | Preview production build in Electron |
 | `npm run lint` | ESLint |
@@ -41,7 +41,7 @@ src/
 Notes live under the OS app data directory in a `notes/` subfolder (one `.md` file per note, YAML frontmatter for title and dates):
 
 | OS | Path |
-|----|------|
+| --- | --- |
 | macOS | `~/Library/Application Support/notes/notes/` |
 | Windows | `%APPDATA%/notes/notes/` |
 | Linux | `~/.config/notes/notes/` |
